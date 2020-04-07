@@ -17,33 +17,33 @@
 
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a href="/customer/insert" class="nav-link">
-                            <i class="icon icon-plus"></i> 新增客户
+                        <a href="/manage/showDeployView" class="nav-link">
+                            <i class="icon icon-plus"></i> 新增信息
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="/customer/list" class="nav-link">
-                            <i class="icon icon-user"></i> 客户列表
-                        </a>
-                    </li>
+<%--                    <li class="nav-item">--%>
+<%--                        <a href="/customer/list" class="nav-link">--%>
+<%--                            <i class="icon icon-user"></i> 客户列表--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
                 </ul>
             </li>
 
-            <li class="nav-title">数据统计</li>
-            <li class="nav-item nav-dropdown">
-                <a href="#" class="nav-link nav-dropdown-toggle">
-                    <i class="icon icon-graph"></i> 网站监控 <i class="fa fa-caret-left"></i>
-                </a>
+<%--            <li class="nav-title">数据统计</li>--%>
+<%--            <li class="nav-item nav-dropdown">--%>
+<%--                <a href="#" class="nav-link nav-dropdown-toggle">--%>
+<%--                    <i class="icon icon-graph"></i> 网站监控 <i class="fa fa-caret-left"></i>--%>
+<%--                </a>--%>
 
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a href="/web/druid" class="nav-link">
-                            <i class="icon icon-speedometer"></i> Druid 监控
-                        </a>
-                    </li>
-                </ul>
-            </li>
+<%--                <ul class="nav-dropdown-items">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a href="/web/druid" class="nav-link">--%>
+<%--                            <i class="icon icon-speedometer"></i> Druid 监控--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
         </ul>
     </nav>
 </div>

@@ -21,38 +21,42 @@
                             新增客户
                         </div>
 
-                        <div class="card-body">
-                            <label>客户姓名</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+<%--                        <form action="${pageContext.request.contextPath}/manage/addDeploy" class="templatemo-login-form" method="post" enctype="multipart/form-data">--%>
+                            <div class="card-body">
+                                <label>标题</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                    </div>
+                                    <input type="text" name="title" class="form-control" placeholder="Name">
                                 </div>
-                                <input type="text" name="name" class="form-control" placeholder="Name">
-                            </div>
 
-                            <label>客户邮箱</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                <label>首图</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <input type="file" name="imgFile" id="imgFile" class="form-control">
                                 </div>
-                                <input type="email" name="email" class="form-control" placeholder="Email">
-                            </div>
 
-                            <label>联系电话</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                <label>薪资下限</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="downSalary" id="downSalary" class="form-control" oninput="value=value.replace(/[^\d]/g,'')">
                                 </div>
-                                <input type="text" name="phone" class="form-control" placeholder="Phone">
-                            </div>
 
-                            <label>详细地址</label>
-                            <div class="input-group mb-3">
-                                <textarea id="textarea" name="address" class="form-control" rows="6" placeholder="Detailed address"></textarea>
-                            </div>
+                                <label>薪资上限</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="upSalary" id="upSalary" class="form-control" oninput="value=value.replace(/[^\d]/g,'')">
+                                </div>
 
-                            <button type="button" class="btn btn-block btn-info" onclick="insertCustomer()">新增客户</button>
-                        </div>
+                                <label>内容</label>
+                                <div class="input-group mb-3">
+                                    <textarea id="content" name="content" class="form-control" rows="6" placeholder="Detailed address"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-info" onclick="insertCustomer()">新增信息</button>
+                            </div>
+<%--                        </form>--%>
                     </div>
                 </div>
             </div>
@@ -63,40 +67,52 @@
 <%@include file="../../common/js.jsp" %>
 <script>
     function insertCustomer() {
-        var name = $("input[name='name']").val();
-        var email = $("input[name='email']").val();
-        var phone = $("input[name='phone']").val();
-        var address = $("#textarea").val();
+        var title = $("input[name='title']").val();
+        var downSalary = $("input[name='downSalary']").val();
+        var upSalary = $("input[name='upSalary']").val();
+        var imgFile = $("input[name='imgFile']").val();
+        var content = $("#textarea").val();
 
-        if (name == null || name.length == 0) {
+        if (title == null || title.length == 0) {
             $('#modal-danger').modal('show');
-            $('#modal-danger .modal-body').html('客户姓名不能为空');
+            $('#modal-danger .modal-body').html('标题不能为空');
             return;
         }
-        if (email == null || email.length == 0) {
+        if (downSalary == null || downSalary.length == 0) {
             $('#modal-danger').modal('show');
-            $('#modal-danger .modal-body').html('客户邮箱不能为空');
+            $('#modal-danger .modal-body').html('薪资下限不能为空');
             return;
         }
-        if (phone == null || phone.length == 0) {
+        if (upSalary == null || upSalary.length == 0) {
             $('#modal-danger').modal('show');
-            $('#modal-danger .modal-body').html('客户联系电话不能为空');
+            $('#modal-danger .modal-body').html('薪资上限不能为空');
             return;
         }
-        if (address == null || address.length == 0) {
+        if (downSalary > upSalary) {
             $('#modal-danger').modal('show');
-            $('#modal-danger .modal-body').html('客户详细地址不能为空');
+            $('#modal-danger .modal-body').html('薪资下限不能大于薪资上限');
+            return;
+        }
+
+        if (imgFile == null || imgFile.length == 0) {
+            $('#modal-danger').modal('show');
+            $('#modal-danger .modal-body').html('首图不能为空');
+            return;
+        }
+        if (content == null || content.length == 0) {
+            $('#modal-danger').modal('show');
+            $('#modal-danger .modal-body').html('内容不能为空');
             return;
         }
 
         $.ajax({
             type: 'POST',
-            url: "/customer/insert",
+            url: "/manage/addDeploy",
             data: {
-                name: name,
-                email: email,
-                phone: phone,
-                address: address
+                title: title,
+                salary: salary,
+                content: content,
+                imgFile: imgFile
             },
             dataType: "json",
             success: function(result) {

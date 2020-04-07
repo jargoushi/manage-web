@@ -25,4 +25,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 文件上传解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件最大的大小 -->
+        <property name="maxUploadSize" value="41300260"></property>
+        <!-- 字符编码 -->
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+
 </beans>

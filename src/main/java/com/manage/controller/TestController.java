@@ -1,7 +1,7 @@
 package com.manage.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Version 1.0
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date:2020/4/7
  * @Content:
  */
-@RestController
+@Controller
 public class TestController {
 
-    @RequestMapping("/test")
+    @RequestMapping("/")
     public String test() {
 
-        return "hello";
+        return "index";
     }
 }
