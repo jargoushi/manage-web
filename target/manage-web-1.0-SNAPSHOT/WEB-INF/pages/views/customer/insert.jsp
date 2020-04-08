@@ -21,7 +21,7 @@
                             新增客户
                         </div>
 
-<%--                        <form action="${pageContext.request.contextPath}/manage/addDeploy" class="templatemo-login-form" method="post" enctype="multipart/form-data">--%>
+                        <form id="newsForm" action="${pageContext.request.contextPath}/manage/addDeploy" class="templatemo-login-form" method="post" enctype="multipart/form-data">
                             <div class="card-body">
                                 <label>标题</label>
                                 <div class="input-group mb-3">
@@ -54,9 +54,9 @@
                                     <textarea id="content" name="content" class="form-control" rows="6" placeholder="Detailed address"></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-block btn-info" onclick="insertCustomer()">新增信息</button>
+                                <button type="submit" class="btn btn-block btn-info">新增信息</button>
                             </div>
-<%--                        </form>--%>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -67,11 +67,14 @@
 <%@include file="../../common/js.jsp" %>
 <script>
     function insertCustomer() {
+        var forData = new FormData($("#newsForm")[0]);
+        forData.append("file",$("#imgFile")[0]);
+        // formData.append("name",name);
         var title = $("input[name='title']").val();
         var downSalary = $("input[name='downSalary']").val();
         var upSalary = $("input[name='upSalary']").val();
         var imgFile = $("input[name='imgFile']").val();
-        var content = $("#textarea").val();
+        var content = $("#content").val();
 
         if (title == null || title.length == 0) {
             $('#modal-danger').modal('show');
@@ -104,17 +107,19 @@
             $('#modal-danger .modal-body').html('内容不能为空');
             return;
         }
+        // var formData = new FormData();
+        // // 服务端要求参数是 pic1
+        // formData.append('imgFile',imgFile);
 
         $.ajax({
             type: 'POST',
             url: "/manage/addDeploy",
-            data: {
-                title: title,
-                salary: salary,
-                content: content,
-                imgFile: imgFile
-            },
+            cache: false, //上传文件不需要缓存
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+            data: forData,
             dataType: "json",
+            contentType: false,
             success: function(result) {
                 if (result.code == 200) {
                     $('#modal-success').modal('show');

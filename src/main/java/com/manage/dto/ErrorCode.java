@@ -8,7 +8,9 @@ package com.manage.dto;
  */
 public enum  ErrorCode {
 
-    DATABASE_ERROR("0001", "数据库操作失败");
+    DATABASE_ERROR("0001", "数据库操作失败"),
+    FILE_ERROR("0002", "文件解析失败");
+
 
     private String code;
 

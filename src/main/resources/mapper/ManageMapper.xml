@@ -3,7 +3,7 @@
 <mapper namespace="com.manage.mapper.ConfigurationMapper">
 
     <insert id="addDeploy" parameterType="com.manage.bean.Manage">
-        INSERT INTO manage(img, title, salary, content) VALUES (#{img}, #{title}, #{salary}, #{content})
+        INSERT INTO manage(img, title, downSalary, upSalary, content) VALUES (#{img}, #{title}, #{downSalary}, #{upSalary}, #{content})
     </insert>
 
 </mapper>
