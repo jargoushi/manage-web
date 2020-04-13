@@ -11,4 +11,6 @@ import com.manage.bean.Manage;
 public interface ConfigurationMapper {
 
     int addDeploy(Manage manage);
+
+    Manage getConfiguration();
 }

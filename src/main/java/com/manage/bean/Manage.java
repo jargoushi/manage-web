@@ -27,6 +27,8 @@ public class Manage {
 
     private String content;
 
+    private String[] imgPaths;
+
     private Date createTime;
 
     private Date updateTime;
@@ -101,6 +103,14 @@ public class Manage {
 
     public void setImgFile(MultipartFile[] imgFile) {
         this.imgFile = imgFile;
+    }
+
+    public String[] getImgPaths() {
+        return imgPaths;
+    }
+
+    public void setImgPaths(String[] imgPaths) {
+        this.imgPaths = imgPaths;
     }
 
     @Override

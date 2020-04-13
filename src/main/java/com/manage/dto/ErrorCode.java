@@ -9,7 +9,8 @@ package com.manage.dto;
 public enum  ErrorCode {
 
     DATABASE_ERROR("0001", "数据库操作失败"),
-    FILE_ERROR("0002", "文件解析失败");
+    FILE_ERROR("0002", "文件解析失败"),
+    NOT_FOUNT_CONFIGURATION("0003", "未配置展示内容");
 
 
     private String code;

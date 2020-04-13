@@ -16,4 +16,10 @@ public interface ConfigurationService {
      * @param manage
      */
     void addDeploy(Manage manage) throws BizException;
+
+    /**
+     * 查询配置信息展示小程序页面
+     * @return
+     */
+    Manage getConfiguration() throws BizException;
 }

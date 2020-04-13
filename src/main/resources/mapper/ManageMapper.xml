@@ -3,7 +3,13 @@
 <mapper namespace="com.manage.mapper.ConfigurationMapper">
 
     <insert id="addDeploy" parameterType="com.manage.bean.Manage">
-        INSERT INTO manage(img, title, downSalary, upSalary, content) VALUES (#{img}, #{title}, #{downSalary}, #{upSalary}, #{content})
+        INSERT INTO manage(img, title, downSalary, upSalary, content, createTime, updateTime) VALUES (#{img}, #{title}, #{downSalary}, #{upSalary}, #{content}, #{createTime}, #{updateTime})
     </insert>
+
+    <select id="getConfiguration" resultType="com.manage.bean.Manage">
+        SELECT img, title, downSalary, upSalary, content
+        FROM manage
+        ORDER BY createTime DESC limit 1
+    </select>
 
 </mapper>

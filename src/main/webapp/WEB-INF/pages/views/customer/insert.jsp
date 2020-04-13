@@ -21,7 +21,8 @@
                             新增客户
                         </div>
 
-                        <form id="newsForm" action="${pageContext.request.contextPath}/manage/addDeploy" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+                        <form id="newsForm" action="${pageContext.request.contextPath}/manage/addDeploy"
+                              class="templatemo-login-form" method="post" enctype="multipart/form-data">
                             <div class="card-body">
                                 <label>标题</label>
                                 <div class="input-group mb-3">
@@ -31,30 +32,36 @@
                                     <input type="text" name="title" class="form-control" placeholder="Name">
                                 </div>
 
-                                <label>首图</label>
+                                <label>轮播图</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                     </div>
-                                    <input type="file" name="imgFile" id="imgFile" class="form-control">
+                                    <input type="file" name="imgFile" class="form-control">
+                                    <input type="file" name="imgFile" class="form-control">
+                                    <input type="file" name="imgFile" class="form-control">
                                 </div>
 
                                 <label>薪资下限</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="downSalary" id="downSalary" class="form-control" oninput="value=value.replace(/[^\d]/g,'')">
+                                    <input type="text" name="downSalary" id="downSalary" class="form-control"
+                                           oninput="value=value.replace(/[^\d]/g,'')">
                                 </div>
 
                                 <label>薪资上限</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="upSalary" id="upSalary" class="form-control" oninput="value=value.replace(/[^\d]/g,'')">
+                                    <input type="text" name="upSalary" id="upSalary" class="form-control"
+                                           oninput="value=value.replace(/[^\d]/g,'')">
                                 </div>
 
                                 <label>内容</label>
                                 <div class="input-group mb-3">
-                                    <textarea id="content" name="content" class="form-control" rows="6" placeholder="Detailed address"></textarea>
+                                <textarea id="content" name="content" class="form-control" rows="6"
+                                          placeholder="Detailed address"></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-block btn-info">新增信息</button>
+                                <button type="button" class="btn btn-block btn-info" onclick="insertCustomer()">新增信息
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -68,7 +75,7 @@
 <script>
     function insertCustomer() {
         var forData = new FormData($("#newsForm")[0]);
-        forData.append("file",$("#imgFile")[0]);
+        // forData.append("file", $("#imgFile")[0]);
         // formData.append("name",name);
         var title = $("input[name='title']").val();
         var downSalary = $("input[name='downSalary']").val();
@@ -91,7 +98,7 @@
             $('#modal-danger .modal-body').html('薪资上限不能为空');
             return;
         }
-        if (downSalary > upSalary) {
+        if (parseInt(downSalary) > parseInt(upSalary)) {
             $('#modal-danger').modal('show');
             $('#modal-danger .modal-body').html('薪资下限不能大于薪资上限');
             return;
@@ -107,9 +114,6 @@
             $('#modal-danger .modal-body').html('内容不能为空');
             return;
         }
-        // var formData = new FormData();
-        // // 服务端要求参数是 pic1
-        // formData.append('imgFile',imgFile);
 
         $.ajax({
             type: 'POST',
@@ -119,8 +123,9 @@
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
             data: forData,
             dataType: "json",
-            contentType: false,
-            success: function(result) {
+            'Content-Type': "multipart/form-data",
+            success: function (result) {
+                console.log(result);
                 if (result.code == 200) {
                     $('#modal-success').modal('show');
                     $('#modal-success .modal-body').html(result.msg);
